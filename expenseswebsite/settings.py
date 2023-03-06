@@ -12,10 +12,20 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+
+# home = os.environ['DB_USER']
+  
+# Print the value of
+# 'HOME' environment variable
+# print("DB_USER:", home)
+
 # Configure Django App for Heroku.
 import django_heroku
 from django.contrib import messages
 
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'expenseswebsite',
+    'expenses',
+    'userpreferences'
 ]
 
 MIDDLEWARE = [
@@ -84,7 +96,11 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME'),
         'HOST':os.environ.get('DB_HOST'),
         'PASSWORD':os.environ.get('DB_USER_PASSWORD'),
-        'USER': os.environ.get('DB_USER'),
+        # 'USER': os.environ.get('DB_USER'),
+        # 'NAME': 'expenses',                      
+         'USER': 'komsy',
+        # 'PASSWORD': 'password',
+        # 'HOST': 'localhost',
     }
 }
 
@@ -140,9 +156,11 @@ MESSAGE_TAGS={
 }
 
 # Email settings
+# log email in terminal
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_FROM= os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-EMAIL_PORT = 587
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
