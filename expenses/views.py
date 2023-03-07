@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 import json
 from django.http import JsonResponse
+from userpreferences.models import UserPreferences
 
 
 def search_expenses(request):
@@ -25,8 +26,11 @@ def index(request):
     paginator = Paginator(expenses, 2)
     page_number = request.GET.get('page')
     page_obj = Paginator.get_page(paginator,page_number)
-
+    # change currency upon user input
+    currency = UserPreferences.objects.get(user=request.user).currency
+    
     context = {
+        'currency':currency,
         'expenses':expenses,
         'page_obj':page_obj,
     }

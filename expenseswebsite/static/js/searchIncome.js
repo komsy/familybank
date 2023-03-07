@@ -14,12 +14,12 @@ searchField.addEventListener("keyup", (e) => {
     if (searchValue.trim().length > 0) {
         paginationContainer.style.display = "none"
         tBody.innerHTML = "";
-        fetch("/search-expenses",{
+        fetch("/income/search-income",{
             body: JSON.stringify({ searchText: searchValue }),
             method: "POST",
         }).then((res)=>res.json())
           .then((data)=>{
-            // console.log('data', data);
+            console.log('data', data);
             appTable.style.display = "none"
             tableOutput.style.display = "block"
 
@@ -32,12 +32,12 @@ searchField.addEventListener("keyup", (e) => {
                 data.forEach((item)=>{ 
                     tBody.innerHTML += `
                     <tr>
-                    <td>${ item.category }</td>
+                    <td>${ item.source }</td>
                     <td>${ item.description }</td>
                     <td>${ item.amount }</td>
                     <td>${ item.date }</td>
-                    <td><a href="{% url 'expense-edit' item.id %}" class="btn btn-secondary btn-sm"> Edit</a></td>
-                    <td><a href="{% url 'expense-delete' item.id %}" class="btn btn-danger btn-sm"> Delete</a></td>
+                    <td><a href="{% url 'income-edit' item.id %}" class="btn btn-secondary btn-sm"> Edit</a></td>
+                    <td><a href="{% url 'income-delete' item.id %}" class="btn btn-danger btn-sm"> Delete</a></td>
                     </tr>`;
                 })
             }

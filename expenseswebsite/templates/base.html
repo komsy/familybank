@@ -18,16 +18,14 @@
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Komtech </a>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
-    <div class="nav-item text-nowrap">
+    <div class="nav-item text-nowrap" style="display: flex; flex-direction: row; align-items: center;">
+      <a href="#" >
+        <span class="text text-capitalize px-3">({{request.user.username}})</span>
+      </a>
       <form action="{% url 'logout' %}" method="POST">
         {% csrf_token %}
-
-        <input class="text text-capitalize px-3" type="submit" value="Sign out">
+        <input class="text text-capitalize px-3 mt-3" type="submit" value="Sign out">
       </form>
     </div>
   </div>

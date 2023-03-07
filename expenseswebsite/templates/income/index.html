@@ -6,17 +6,17 @@
     <div class="col-md-10">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Expenses</a></li>
-          <li class="breadcrumb-item active" aria-current="page">My Expenses</li>
+          <li class="breadcrumb-item"><a href="#">Income</a></li>
+          <li class="breadcrumb-item active" aria-current="page">My Income</li>
         </ol>
     </nav>
     </div>
     <div class="col-md-2">
-      <a href="{% url 'add-expense' %}" class="btn btn-primary mt-4 float-right"> Add Expense</a>
+      <a href="{% url 'add-income' %}" class="btn btn-primary mt-4 float-right"> Add Income</a>
     </div>
   </div>
   <div class="container">
-    {% include 'partials/messages.html' %} {% if expenses.count %}
+    {% include 'partials/messages.html' %} {% if income.count %}
     <div class="row">
       <div class="col-md-8">
 
@@ -31,7 +31,7 @@
       <table class="table table-stripped table-hover mt-2">
         <thead class="bg-warning">
           <tr>
-            <th>Category</th>
+            <th>Source</th>
             <th>Description</th>
             <th>Amount ({{currency}})</th>
             <th>Date</th>
@@ -39,38 +39,14 @@
           </tr>
         </thead>
         <tbody>
-          {% for expense in page_obj %}
+          {% for income in page_obj %}
           <tr>
-            <td>{{ expense.category }}</td>
-            <td>{{ expense.description }}</td>
-            <td>{{ expense.amount }}</td>
-            <td>{{ expense.date }}</td>
-            <td>
-              <a type="button" class="btn btn-outline-success btn-sm"  href={%  url 'expense-edit' expense.id %}>Edit</a>
-              <!-- <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal">X</button>
-             
-              <div class="modal" tabindex="-1" role="dialog" id="exampleModal">
-               <div class="modal-dialog" role="document">
-                 <div class="modal-content">
-                   <div class="modal-header">
-                     <h5 class="modal-title">Confirm Action!</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                     </button>
-                   </div>
-                   <div class="modal-body">
-                     <p>Are you sure you want to delete this Expense</p>
-                   </div>
-                   <div class="modal-footer">
-                     <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
-                     <a type="button" class="btn btn-primary"  href={%  url 'expense-delete' expense.id %}>YES</a>
-                   </div>
-                 </div>
-               </div>
-             </div> -->
-             </td>
-            <!-- <td><a href="{% url 'expense-edit' expense.id %}" class="btn btn-secondary btn-sm"> Edit</a></td>-->
-            <td><a href="{% url 'expense-delete' expense.id %}" class="btn btn-danger btn-sm"> Delete</a></td> 
+            <td>{{ income.source }}</td>
+            <td>{{ income.description }}</td>
+            <td>{{ income.amount }}</td>
+            <td>{{ income.date }}</td>
+            <td><a href="{% url 'income-edit' income.id %}" class="btn btn-secondary btn-sm"> Edit</a></td>
+            <td><a href="{% url 'income-delete' income.id %}" class="btn btn-danger btn-sm"> Delete</a></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -80,7 +56,7 @@
       <table class="table table-stripped table-hover mt-2">
         <thead class="bg-warning">
           <tr>
-            <th>Category</th>
+            <th>Source</th>
             <th>Description</th>
             <th>Amount ({{currency}})</th>
             <th>Date</th>
@@ -110,8 +86,8 @@
     </ul>
 
     {% endif %}
-    </div>
+    </div> 
   </div>
 </div>  
-<script src="{% static 'js/searchExpenses.js' %}"></script>
+<script src="{% static 'js/searchIncome.js' %}"></script>
 {% endblock content %}
