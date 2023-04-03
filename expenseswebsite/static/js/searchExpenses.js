@@ -36,8 +36,6 @@ searchField.addEventListener("keyup", (e) => {
                     <td>${ item.description }</td>
                     <td>${ item.amount }</td>
                     <td>${ item.date }</td>
-                    <td><a href="{% url 'expense-edit' item.id %}" class="btn btn-secondary btn-sm"> Edit</a></td>
-                    <td><a href="{% url 'expense-delete' item.id %}" class="btn btn-danger btn-sm"> Delete</a></td>
                     </tr>`;
                 })
             }

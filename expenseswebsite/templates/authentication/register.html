@@ -31,7 +31,11 @@
                     </div>
                     <input type="submit" value="Register" class="btn btn-block btn-primary submit-btn">
                 </form>
-            </div>
+                <div class="container">
+                    <span class="text-lead lead">Have an account?<a href="{% url 'login' %}">Sign In</a></span> <br>
+                    <span class="text-lead lead">Forgot Password?<a href="{% url 'request-password' %}">Reset it</a></span>
+                </div>
+            </div> 
         </div>
     </div>
     <div class="col-md-4"></div>

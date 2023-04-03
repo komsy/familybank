@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import UserIncome, Source
-from django.contrib import messages
-from django.core.paginator import Paginator
-import json
-from django.http import JsonResponse
 from userpreferences.models import UserPreferences
+from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
+from .models import UserIncome, Source
+from django.http import JsonResponse
+from django.contrib import messages
+import datetime
+import json
 
 
 def search_income(request):
@@ -109,3 +110,33 @@ def income_delete(request, id):
 
     messages.success(request, 'Income deleted successfully')
     return redirect('income')
+
+
+def incomeStats_view(request):
+    return render (request, 'income/income_stats.html')
+
+# return incomes summary
+def income_source_summary(request):
+    todays_date = datetime.date.today()
+    six_months_ago = todays_date-datetime.timedelta(30*6)
+    incomes = UserIncome.objects.filter(owner=request.user, date__gte=six_months_ago, date__lte=todays_date)  
+    finalrep = {}  
+
+    def get_source(expense):
+        return expense.source
+
+    source_list = list(set(map(get_source, incomes)))
+
+    def get_income_source_amount(source):
+        amount = 0
+        filtered_by_source = incomes.filter(source=source)
+
+        for item in filtered_by_source:
+            amount+= item.amount
+        return amount
+
+    for x in incomes:
+        for y in source_list:
+            finalrep[y] = get_income_source_amount(y)
+    return JsonResponse({'income_source_data': finalrep}, safe=False)
+

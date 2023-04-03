@@ -19,7 +19,7 @@ searchField.addEventListener("keyup", (e) => {
             method: "POST",
         }).then((res)=>res.json())
           .then((data)=>{
-            console.log('data', data);
+            // console.log('data', data);
             appTable.style.display = "none"
             tableOutput.style.display = "block"
 
@@ -36,8 +36,6 @@ searchField.addEventListener("keyup", (e) => {
                     <td>${ item.description }</td>
                     <td>${ item.amount }</td>
                     <td>${ item.date }</td>
-                    <td><a href="{% url 'income-edit' item.id %}" class="btn btn-secondary btn-sm"> Edit</a></td>
-                    <td><a href="{% url 'income-delete' item.id %}" class="btn btn-danger btn-sm"> Delete</a></td>
                     </tr>`;
                 })
             }

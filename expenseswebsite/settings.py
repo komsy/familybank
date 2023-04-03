@@ -98,8 +98,8 @@ DATABASES = {
         'HOST':os.environ.get('DB_HOST'),
         'PASSWORD':os.environ.get('DB_USER_PASSWORD'),
         # 'USER': os.environ.get('DB_USER'),
-        # 'NAME': 'expenses',                      
-         'USER': 'komsy',
+        # 'NAME': 'expenses',    
+         'USER': 'komsy',# root 
         # 'PASSWORD': 'password',
         # 'HOST': 'localhost',
     }
